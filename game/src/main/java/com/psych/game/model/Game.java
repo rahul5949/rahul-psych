@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +28,7 @@ import lombok.Setter;
 public class Game extends Auditable {
 
 	@ManyToMany
+	@JsonIdentityReference
 	@Getter
 	@Setter
 	private Set<Player> players = new HashSet<>();
@@ -36,6 +40,7 @@ public class Game extends Auditable {
 	private GameMode gameMode;
 	
 	@OneToMany(mappedBy="game", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	@Getter
 	@Setter
 	private List<Round> rounds = new ArrayList<>();
@@ -53,9 +58,11 @@ public class Game extends Auditable {
 	@Getter
 	@Setter
 	@ManyToOne
+	@JsonIdentityReference
 	private Player leader;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIdentityReference
 	@Getter
 	@Setter
 	private Map<Player, Stat> playerStats = new HashMap<>();
@@ -66,6 +73,7 @@ public class Game extends Auditable {
 	private GameStatus gameStatus;
 	
 	@ManyToMany
+	@JsonIdentityReference
 	@Getter
 	@Setter
 	private Set<Player> readyPlayers = new HashSet<>();

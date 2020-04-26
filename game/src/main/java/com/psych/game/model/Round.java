@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,22 +23,31 @@ public class Round extends Auditable {
 	@ManyToOne
 	@Getter
 	@Setter
+	@JsonBackReference
 	private Game game;
 	
+	@ManyToOne
+	@JsonIdentityReference
 	@Getter
 	@Setter
 	private Question question;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonManagedReference
 	@Getter
 	@Setter
-	Map<Player, PlayerAnswer> playerAnswers = new HashMap<>();
+	private Map<Player, PlayerAnswer> submittedAnswers = new HashMap<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonManagedReference
 	@Getter
 	@Setter
-	Map<Player, PlayerAnswer> selectedAnswers = new HashMap<>();
+	private Map<Player, PlayerAnswer> selectedAnswers = new HashMap<>();
 	
+	@ManyToOne
+	@JsonIdentityReference
+	@Getter
+	@Setter
 	private EllenAnswer ellenAnswer;
 	
 	@NotNull
