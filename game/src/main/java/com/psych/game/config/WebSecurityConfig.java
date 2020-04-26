@@ -19,11 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/dev-test/").permitAll()
-			.antMatchers("/dev-test/players").authenticated()
-			.antMatchers("/dev-test/user*").permitAll()
-			.antMatchers("/dev-test/game*").permitAll()
-			.anyRequest().permitAll()
+			.antMatchers("/dev-test/*").permitAll()
+			.anyRequest().authenticated()
 			.and().formLogin().permitAll()
 			.and().logout().permitAll();
 	}

@@ -1,4 +1,4 @@
-package com.psych.game;
+package com.psych.game.controller;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import com.psych.game.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/dev-test")
-public class HelloWorldController {
+public class DevTestController {
 	
 	@Autowired(required = true)
 	private PlayerRepository playerRepoitory;
